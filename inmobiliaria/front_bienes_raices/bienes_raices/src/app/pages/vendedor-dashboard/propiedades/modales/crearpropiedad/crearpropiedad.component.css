@@ -1,0 +1,195 @@
+/* ================== */
+/* 📌 ESTILOS DEL MODAL */
+/* ================== */
+.modal {
+    display: flex;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Más oscura para mejor legibilidad */
+    backdrop-filter: blur(5px); /* Efecto difuminado */
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* ============================= */
+/* 📌 ESTILOS DEL CONTENIDO DEL MODAL */
+/* ============================= */
+.modal-content {
+    position: relative;
+    background-color: white;
+    width: 90%;
+    max-width: 600px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+    animation: scaleIn 0.3s ease-in-out;
+}
+
+/* ================== */
+/* 📌 ANIMACIONES */
+/* ================== */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* ================== */
+/* 📌 CABECERA DEL MODAL */
+/* ================== */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.modal-header h2 {
+    font-size: 20px;
+    color: #333;
+}
+
+/* ================== */
+/* 📌 BOTÓN DE CERRAR */
+/* ================== */
+.closer {
+    cursor: pointer;
+    color: #555;
+    font-size: 22px;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out, transform 0.2s;
+}
+
+.closer:hover {
+    color: red;
+    transform: scale(1.2);
+}
+
+/* ================== */
+/* 📌 CUERPO DEL MODAL */
+/* ================== */
+.body-picture {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.body-picture img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #ddd;
+    transition: transform 0.3s;
+}
+
+.body-picture img:hover {
+    transform: scale(1.1);
+}
+
+/* ================== */
+/* 📌 FORMULARIO */
+/* ================== */
+.body-conten {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.info, .info-2 {
+    width: 48%;
+}
+
+.item-label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border 0.3s ease-in-out;
+}
+
+.form-control:focus {
+    border: 1px solid #007bff;
+    outline: none;
+}
+
+/* ================== */
+/* 📌 PIE DEL MODAL */
+/* ================== */
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    margin-top: 20px;
+}
+
+/* ================== */
+/* 📌 BOTONES */
+/* ================== */
+button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.btn-secondary {
+    background-color: #aaa;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #888;
+    transform: scale(1.05);
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* ================== */
+/* 📌 RESPONSIVE DESIGN */
+/* ================== */
+@media (max-width: 600px) {
+    .modal-content {
+        width: 95%;
+    }
+
+    .body-conten {
+        flex-direction: column;
+    }
+
+    .info, .info-2 {
+        width: 100%;
+    }
+}

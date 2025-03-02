@@ -1,0 +1,74 @@
+<app-header></app-header>
+
+<section class="section">
+  <div>
+    <h2>Nuestras Propiedades</h2>
+  </div>
+  <div class="container">
+    @for(anuncio of anuncios; track $index) {
+      <div class="card anuncio_casa">
+        <div class="header_card anuncio">
+          <img src="http://localhost:3500/uploads/propiedad/{{ anuncio.imagen.split(',')[0] }}" alt="Imagen de la propiedad">
+          <h3>{{ anuncio.titulo }}</h3>
+        </div>
+        <div class="card_contenido">
+          <p>{{ anuncio.descripcion | slice:0:30 }}...</p>
+          <div class="card_precio">
+            <p class="precio">Precio: <span>{{ anuncio.precio }}</span></p>
+          </div>
+          <div class="card_iconos">
+            <img src="../../assets/image/icono_wc.svg" alt="Baños">
+            <p>{{ anuncio.wc }}</p>
+            <img src="../../assets/image/icono_estacionamiento.svg" alt="Estacionamiento">
+            <p>{{ anuncio.parqueadero }}</p>
+            <img src="../../assets/image/icono_dormitorio.svg" alt="Habitaciones">
+            <p>{{ anuncio.habitaciones }}</p>
+          </div>
+          <div class="ver_todas">
+            <a  data-bs-toggle="modal" data-bs-target="#propertyModal" (click)="openDetalles(anuncio)">Ver Propiedad</a>
+          </div>
+        </div>
+      </div>
+    }
+    @empty {
+      <p>No hay propiedades disponibles.</p>
+    }
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal fade" id="propertyModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ propiedadDetails?.titulo }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+
+
+        <!-- Carrusel de imágenes -->
+        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            @for (imagen of propiedadDetails?.imagenes; track $index) {
+              <div class="carousel-item" [class.active]="$index === 0">
+                <img [src]="'http://localhost:3500/uploads/propiedad/' + imagen.trim()" class="d-block w-100" alt="Imagen de la propiedad">
+              </div>
+            }
+           
+          </div>
+          <div class="descripcionCarrucel">
+            <p>{{propiedadDetails?.descripcion}}</p>
+          </div>
+          <!-- Controles del carrusel -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

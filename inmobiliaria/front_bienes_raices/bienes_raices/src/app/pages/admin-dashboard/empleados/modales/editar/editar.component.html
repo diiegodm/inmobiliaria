@@ -1,0 +1,73 @@
+
+
+
+<div class="modal" >
+  <div class="modal-content" >
+    <div class="modal-header">
+      <h2>Editar Vendedor</h2>
+      <span class="closer" (click)="cancelarEdicion()" >X</span>
+    </div>
+
+    <form (submit)="saveChanges()">
+      <div class="card-employet">
+
+     
+
+        <div class="body-conten">
+          
+          <div class="info">
+            <label class="item-label">ID Vendedor:</label>
+            <input type="text" class="form-control" [(ngModel)]="empleadoEdit.idvendedor" name="idvendedor"  disabled>
+
+            <!-- Nombre -->
+            <label class="item-label">Nombre:</label>
+            <input type="text" class="form-control" [(ngModel)]="empleadoEdit.nombre" name="nombre"> 
+
+            <!-- Apellido -->
+            <label class="item-label">Apellido:</label>
+            <input type="text" class="form-control" [(ngModel)]="empleadoEdit.apellido" name="iapellido">
+
+            <!-- Teléfono -->
+            <label class="item-label">Teléfono:</label>
+            <input type="text" class="form-control" [(ngModel)]="empleadoEdit.telefono" name="telefono">
+
+            <!-- Rol -->
+            <label class="item-label">Rol:</label>
+            <select class="form-control" [(ngModel)]="empleadoEdit.rol" name="rol">
+              <option [value]="1">Vendedor</option>
+              <option [value]="2">Otro Rol</option>
+            </select>
+
+          </div>
+          <div class="info-2">
+            <!-- Correo -->
+            <label class="item-label">Correo:</label>
+            <input type="email" class="form-control" [(ngModel)]="empleadoEdit.correo" name="icorreo">
+
+            <!-- Contraseña -->
+            <label class="item-label">Contraseña:</label>
+            <input type="password" class="form-control" [(ngModel)]="empleadoEdit.password" name="password">
+
+            <!-- Dirección -->
+            <label class="item-label">Dirección:</label>
+            <input type="text" class="form-control" [(ngModel)]="empleadoEdit.direccion" name="direccion">
+
+            <!-- DNI -->
+            <label class="item-label">DNI:</label>
+            <input type="text" class="form-control" [(ngModel)]="empleadoEdit.dni" name="dni">
+          </div>
+
+          <label for="image">Imagen (URL)</label>
+          <input type="file" id="image" name="image" accept="image/*" (change)="handleImage($event)">
+
+
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="cancelarEdicion()">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+      </div>
+    </form>
+  </div>
+</div>

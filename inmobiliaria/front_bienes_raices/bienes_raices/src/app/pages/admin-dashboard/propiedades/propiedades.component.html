@@ -1,0 +1,124 @@
+<div class="d-flex">
+  <!-- Sidebar -->
+  <div class="sidebar bg-dark text-white p-3">
+    <h4 class="text-center">Admin</h4>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link text-white" [routerLink]="['/ADMIN/admin']">📊 Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" [routerLink]="['/ADMIN/clientes']">👤 clientes </a>
+      </li>
+      <li class="nav-item">
+
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-danger w-100 mt-2" (click)="logout()">🚪 Cerrar Sesión</button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="content p-4 flex-grow-1">
+    <h2>empleados</h2>
+
+    <!-- Tarjetas de estadísticas -->
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card text-white bg-primary mb-3">
+          <div class="card-header cardC " [routerLink]="['/ADMIN/clientes']">registro de usuarios </div>
+          <div class="card-body">
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-white bg-success mb-3">
+          <div class="card-header cardC " [routerLink]="['/ADMIN/empleados']">
+            <h5>empleados</h5>
+          </div>
+          <div class="card-body">
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-white bg-warning mb-3">
+          <div class="card-header cardC">
+            <h5>propiedades</h5>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p class="card-text"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <!-- Tabla de usuarios -->
+    <h3>propiedades </h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+
+          <th>id propiedad</th>
+          <th>titulo</th>
+          <th>Precio</th>
+          <th>vendedor</th>
+          <th>Ciudad</th>
+          
+
+        </tr>
+      </thead>
+      <tbody>
+
+        @for(anuncio of anuncios; track $index){
+        <tr>
+          <td>{{anuncio.idpropiedades}}</td>
+          <td>{{anuncio.titulo}}</td>
+          <td>{{anuncio.precio}}</td>
+          @for(vendedor of vendedores; track $index){
+            @if(anuncio.vendedor_idvendedor === vendedor.idvendedor){
+          <td>{{vendedor.nombre}} {{vendedor.apellido}}</td>
+          }
+        }
+
+
+          <td>{{anuncio.ciudad}}</td>
+          <td>
+
+            <button (click)="open()" class="btn btn-warning btn-sm">
+              <i class="bi bi-eye-fill"></i>
+            </button>
+
+          </td>
+        </tr>
+        }
+
+
+
+      </tbody>
+    </table>
+  </div>
+</div>
+<nav>
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [class.disabled]="currentPage === 1">
+      <a class="page-link" (click)="setPage(currentPage - 1)">Anterior</a>
+    </li>
+
+    @for (page of [].constructor(totalPages); track $index) {
+    <li class="page-item" [class.active]="currentPage === ($index + 1)">
+      <a class="page-link" (click)="setPage($index + 1)">{{ $index + 1 }}</a>
+    </li>
+    }
+
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <a class="page-link" (click)="setPage(currentPage + 1)">Siguiente</a>
+    </li>
+  </ul>
+</nav>

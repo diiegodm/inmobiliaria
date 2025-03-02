@@ -1,0 +1,230 @@
+<header class="header">
+    <div class="darkMode">
+        <img src="/assets/image/moon_5370733.png" alt="">
+    </div>
+
+
+    <div class="icono_header">
+        <h1><a></a>ventas y soluciones</h1>
+
+        <nav>
+            <ul>
+                
+                <li [routerLink]="['/Nosotros']">Nosotros</li>
+                <li [routerLink]="['/anuncios']" >Anuncios</li>
+                <li>Blog</li>
+                <li [routerLink]="['/contacto']">contacto</li>
+                <li [routerLink]="['/auth/login']" >login</li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="contenedor">
+        <p>Venta de casas y Departamentos </p>
+        <P>Exclusivos y de lujo </P>
+
+    </div>
+
+</header>
+<main>
+    <section class="contenido_section">
+
+        <h2>Sobre Nosotros</h2>
+
+        <div class="section_cuerpo ">
+
+
+
+            <div class="card">
+
+                <div class="header_card">
+                    <img src="../../assets/image/icono1.svg" alt="Candado">
+
+                    <h2>seguridad</h2>
+                </div>
+                <div class="card_contenido">
+
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda ex quas magni quia enim itaque
+                        exercitationem tempore molestiae culpa, voluptatem iusto fuga minima omnis a? Labore consequatur
+                        molestias tempore odit?
+                    </p>
+                </div>
+            </div>
+            <div class="card">
+
+                <div class="header_card">
+                    <img src="../../assets/image/icono2.svg" alt="">
+                    <h2>precio</h2>
+                </div>
+                <div class="card_contenido">
+
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda ex quas magni quia enim itaque
+                        exercitationem tempore molestiae culpa, voluptatem iusto fuga minima omnis a? Labore consequatur
+                        molestias tempore odit?
+                    </p>
+                </div>
+            </div>
+            <div class="card">
+
+                <div class="header_card">
+                    <img src="../../assets/image/icono3.svg" alt="">
+                    <h2>A Tiempo</h2>
+                </div>
+                <div class="card_contenido">
+
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda ex quas magni quia enim itaque
+                        exercitationem tempore molestiae culpa, voluptatem iusto fuga minima omnis a? Labore consequatur
+                        molestias tempore odit?
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="propiedades">
+        <div class="propiedades_encabezado">
+            <h2>Nuestras Propiedades</h2>
+        </div>
+        <div class="propiedades_contenedor">
+            @for(anuncio of anuncios; track $index) {
+                @if($index < 3) {
+                    <div class="propiedad_card">
+                        <div class="propiedad_imagen">
+                            <img src="http://localhost:3500/uploads/propiedad/{{ anuncio.imagen.split(',')[0] }}" alt="Imagen de la propiedad">
+                        </div>
+                        <div class="propiedad_info">
+                            <h3 class="propiedad_titulo">{{ anuncio.titulo }}</h3>
+                            <p class="propiedad_descripcion">{{ anuncio.descripcion }}</p>
+                            <p class="propiedad_precio">Precio: <span>{{ anuncio.precio }}</span></p>
+                            <div class="propiedad_iconos">
+                                <div class="propiedad_icono">
+                                    <img src="../../assets/image/icono_wc.svg" alt="Baños">
+                                    <p>{{ anuncio.wc }}</p>
+                                </div>
+                                <div class="propiedad_icono">
+                                    <img src="../../assets/image/icono_estacionamiento.svg" alt="Estacionamiento">
+                                    <p>{{ anuncio.parqueadero }}</p>
+                                </div>
+                                <div class="propiedad_icono">
+                                    <img src="../../assets/image/icono_dormitorio.svg" alt="Habitaciones">
+                                    <p>{{ anuncio.habitaciones }}</p>
+                                </div>
+                            </div>
+                            <div class="propiedad_boton">
+                                <a href="#">Ver Propiedad</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            @empty {
+                <p class="propiedades_vacio">No hay propiedades disponibles.</p>
+            }
+        </div>
+    
+        <div class="propiedades_ver_todas">
+            <a [routerLink]="['/anuncios']">Ver todas</a>
+        </div>
+    </section>
+    
+    
+
+     
+   
+    <section class="contenido_contacto">
+
+        <h2>encuentra la casa de tus sueños</h2>
+        <div class="contacto">
+            <p>Llena el formulario de contacto y un asesor se pondrá en contacto contigo a la brevedad</p>
+
+            <a [routerLink]="['/contacto']" >contanctanos</a>
+        </div>
+
+    </section>
+
+    <section>
+
+
+
+        <div class="contenido_blog">
+
+            <div class="container_blog">
+
+                <h2> Nuestro Blog</h2>
+
+                <div class="card_blog">
+
+                    <div class="header_card_blog">
+                        <img src="../../assets/image/blog1.jpg" alt="">
+                    </div>
+                    <div class="card_contenido_blog">
+                        <h3>Terraza en el techo de tu casa</h3>
+                        <p> escrito el <span>20/10/2021</span> por <span>admin</span> </p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas ipsa iste consectetur ut,.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="card_blog">
+                    <div class="header_card_blog">
+                        <img src="../../assets/image/blog2.jpg" alt="">
+                    </div>
+                    <div class="card_contenido_blog">
+                        <h3>Terraza en el techo de tu casa</h3>
+                        <p> escrito el <span>20/10/2021</span> por <span>admin</span> </p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas ipsa iste consectetur ut,.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="testimonio">
+                <h3>testimonios</h3>
+                <div class="testimonio_cuerpo">
+                    <div class="testimonio_card">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda ex quas magni quia
+                            enim
+                            itaque
+                            exercitationem tempore molestiae culpa, voluptatem iusto fuga minima omnis a? Labore
+                            consequatur
+                            molestias tempore odit?
+                        </p>
+                        <p class="creador">Diego Arevalo</p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+    </section>
+
+
+</main>
+<footer>
+    <div class="footer">
+
+        <nav>
+            <ul>
+                <li>inicio</li>
+                <li>Nosotros</li>
+                <li>Anuncios</li>
+                <li>Blog</li>
+                <li>contacto</li>
+            </ul>
+        </nav>
+        <div>
+            <p>todos los derechos reservados</p>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,166 @@
+<div class="d-flex">
+  <!-- Sidebar -->
+  <div class="sidebar bg-dark text-white p-3">
+    <h4 class="text-center">Admin</h4>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link text-white" [routerLink]="['/ADMIN/admin']">📊 Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" [routerLink]="['/ADMIN/empleados']">👤 empleados</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" [routerLink]="['/ADMIN/propiedades']">⚙️ propiedades</a>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-danger w-100 mt-2" (click)="logout()">🚪 Cerrar Sesión</button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="content p-4 flex-grow-1">
+    <h2>Dashboard</h2>
+
+    <!-- Tarjetas de estadísticas -->
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card text-white bg-primary mb-3">
+          <div class="card-header cardC ">registro de usuarios </div>
+          <div class="card-body">
+            <h5 class="card-title">{{clientesTotales}}</h5>
+            
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-white bg-success mb-3">
+          <div class="card-header cardC " [routerLink]="['/ADMIN/empleados']" >empleados </div>
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+         
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-white bg-warning mb-3">
+          <div class="card-header cardC " [routerLink]="['/ADMIN/propiedades']">propiedades</div>
+          <div class="card-body">
+            <p class="card-text"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <h2 class="h2">cleintes en asesoramiento </h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+
+          <th>Nombre</th>
+          <th>apellido</th>
+          <th>Email</th>
+          <th>estado</th>
+          <th>asesorado por </th>
+        </tr>
+      </thead>
+      <tbody>
+
+        @for(cliente of clientes; track $index){
+          @if(cliente.estado !== 'atendido'){
+        <tr>
+          <td>{{cliente.nombre}}</td>
+          <td>{{cliente.apellido}}</td>
+          <td>{{cliente.email}}</td>
+          <td>{{cliente.estado}}</td>
+          
+
+          
+
+          @for(vendedor of vendedores; track $index){
+          @if(cliente.vendedor_id === vendedor.idvendedor){
+          <td>{{vendedor.nombre}} {{vendedor.apellido}}</td>
+          }
+
+          }
+
+          
+
+          <td>
+
+          </td>
+        </tr>
+        }
+      }
+
+
+      </tbody>
+    </table>
+
+
+    <h2 class="h2">clientes atendidos </h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+
+          <th>Nombre</th>
+          <th>apellido</th>
+          <th>Email</th>
+          <th>estado</th>
+          <th>asesorado por </th>
+        </tr>
+      </thead>
+      <tbody>
+
+        @for(cliente of clientes; track $index){
+        @if(cliente.estado === "atendido"){
+        <tr>
+          <td>{{cliente.nombre}}</td>
+          <td>{{cliente.apellido}}</td>
+          <td>{{cliente.email}}</td>
+          <td>{{cliente.estado}}</td>
+
+
+
+          @for(vendedor of vendedores; track $index){
+          @if(cliente.vendedor_id === vendedor.idvendedor){
+          <td>{{vendedor.nombre}} {{vendedor.apellido}}</td>
+          }
+
+          }
+
+
+
+          <td>
+
+          </td>
+        </tr>
+        }
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<nav>
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [class.disabled]="currentPage === 1">
+      <a class="page-link" (click)="setPage(currentPage - 1)">Anterior</a>
+    </li>
+
+    @for (page of [].constructor(totalPages); track $index) {
+    <li class="page-item" [class.active]="currentPage === ($index + 1)">
+      <a class="page-link" (click)="setPage($index + 1)">{{ $index + 1 }}</a>
+    </li>
+    }
+
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <a class="page-link" (click)="setPage(currentPage + 1)">Siguiente</a>
+    </li>
+  </ul>
+</nav>
+
+
+<!-- Botón para abrir el modal -->

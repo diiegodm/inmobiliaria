@@ -1,0 +1,65 @@
+Modal de detalles
+<div class="modal" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Detalles del Vendedor</h2>
+      <span class="closer" (click)="closeModal()">X</span>
+    </div>
+
+
+    <div class="card-employet">
+
+      <div class="body-picture">
+        <img src="http://localhost:3500/uploads/empleados/{{empleadoDetails.img.split(',')[0] }}"
+          alt="Imagen de la propiedad">
+      </div>
+
+      <div class="body-conten">
+        
+        <div class="info">
+          <label class="item-label">ID Vendedor:</label>
+          <span class="item-value">{{ empleadoDetails.idvendedor }}</span>
+
+          <!-- Nombre -->
+          <label class="item-label">Nombre:</label>
+          <span class="item-value">{{ empleadoDetails.nombre }}</span>
+
+          <!-- Apellido -->
+          <label class="item-label">Apellido:</label>
+          <span class="item-value">{{ empleadoDetails.apellido }}</span>
+
+          <!-- Teléfono -->
+          <label class="item-label">Teléfono:</label>
+          <span class="item-value">{{ empleadoDetails.telefono }}</span>
+
+          <!-- Rol -->
+          <label class="item-label">Rol:</label>
+          <span class="item-value">{{ empleadoDetails.rol === 1 ? 'Vendedor' : 'Otro Rol' }}</span>
+
+        </div>
+        <div class="info-2">
+          <!-- Correo -->
+          <label class="item-label">Correo:</label>
+          <span class="item-value">{{ empleadoDetails.correo }}</span>
+
+          <!-- Contraseña -->
+          <label class="item-label">Contraseña:</label>
+          <span class="item-value">**********</span> <!-- Opcional: no mostrar la contraseña real por seguridad -->
+
+          <!-- Dirección -->
+          <label class="item-label">Dirección:</label>
+          <span class="item-value">{{ empleadoDetails.direccion }}</span>
+
+          <!-- DNI -->
+          <label class="item-label">DNI:</label>
+          <span class="item-value">{{ empleadoDetails.dni }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-secondary" (click)="closeModal()">Cerrar</button>
+    </div>
+  </div>
+</div>
+

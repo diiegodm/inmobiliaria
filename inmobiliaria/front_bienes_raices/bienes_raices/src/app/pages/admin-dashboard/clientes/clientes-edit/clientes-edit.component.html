@@ -1,0 +1,42 @@
+
+
+<div class="modal" id="modalCliente">
+    <div class="modal-content">
+        <!-- Botón para cerrar la modal -->
+        <span class="close" (click)="closeModal()">&times;</span>
+
+        <h2>Detalles del Cliente</h2>
+
+        <!-- Tarjeta de información del cliente -->
+        <form  (ngSubmit)="handleSubmit()">
+            <label for="nombre">Nombre:  <span>{{ cliente.nombre }}</span></label>
+            <label for="apellido">Apellido: <span> {{ cliente.apellido }}</span></label>
+            <label for="telefono">Teléfono: <span>{{ cliente.telefono }}</span></label>
+            <label for="email">Email: <span>{{ cliente.email }}</span></label>
+            <label for="fecha">Fecha: <span>{{ cliente.fecha | date }}</span></label>
+            <label for="hora">Hora: <span>{{ cliente.hora }}</span></label>
+            <label for="mensaje">Mensaje: <span>{{ cliente.mensaje }}</span></label>
+            <label for="forma_de_contacto">Forma de Contacto: <span>{{ cliente.forma_de_contacto }}</span></label>
+            <label for="presupuesto">Presupuesto: <span>{{ cliente.presupuesto | currency }}</span></label>
+            <label for="operacion">Operación:  <span> {{ cliente.operacion }}</span></label>
+            <label for="estado">Estado: <span>{{ cliente.estado }}</span></label>
+
+         
+
+            <label for="vendedor_id">Asesor:</label>
+            <select id="vendedor_id" [(ngModel)]="asignar.vendedor_id" name="vendedor_id" (change)="logVendedorId()">
+                <option value="" disabled selected>Asignar vendedor</option>
+                <ng-container *ngFor="let vendedor of vendedores">
+                    <option *ngIf="vendedor.estado === 0 && vendedor.rol === 1" [value]="vendedor.idvendedor">
+                        {{ vendedor.nombre }} {{ vendedor.apellido }}
+                    </option>
+                </ng-container>
+            </select>
+            
+            
+        
+
+            <button type="submit">Guardar Cambios</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,170 @@
+<div class="d-flex">
+    <!-- Sidebar -->
+    <div class="sidebar bg-dark text-white p-3">
+      <h4 class="text-center">Admin</h4>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link text-white" >📊 Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" [routerLink]="['/EM/empleado']">👤 clientes </a>
+        </li>
+        <li class="nav-item">
+  
+        </li>
+        <li class="nav-item">
+          <button class="btn btn-danger w-100 mt-2" (click)="logout()">🚪 Cerrar Sesión</button>
+        </li>
+      </ul>
+    </div>
+  
+    <!-- Contenido principal -->
+    <div class="content p-4 flex-grow-1">
+  
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header cardC " [routerLink]="['/EM/empleado']"><h3>tus clientes </h3></div>
+  
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header cardC  " (click)="openpropiedad()" >crear propiedad</div>
+  
+          </div>
+        </div>
+      </div>
+     
+      <h3>lista de tus propiedades</h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+  
+            <th>titulo</th>
+            <th>descripcion</th>
+            <th>ciudad</th>
+            
+            
+          </tr>
+        </thead>
+        <tbody>
+  
+          @for(propiedad of propiedades; track $index){
+         @if(propiedad.estado === 0 ){
+
+         
+  
+          <tr>
+            <td>{{propiedad.titulo}}</td>
+            <td>{{propiedad.descripcion  }}</td>
+            <td>{{propiedad.ciudad}}</td>
+            
+  
+          
+            <td>
+  
+              <button (click)="open(propiedad)" class="btn btn-warning btn-sm">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+  
+  
+           
+            </td>
+          </tr>
+        }
+      }
+  
+  
+        </tbody>
+      </table>
+      <nav>
+        <ul class="pagination justify-content-center">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="setPage(currentPage - 1)">Anterior</a>
+          </li>
+      
+          @for (page of [].constructor(totalPages); track $index) {
+          <li class="page-item" [class.active]="currentPage === ($index + 1)">
+            <a class="page-link" (click)="setPage($index + 1)">{{ $index + 1 }}</a>
+          </li>
+          }
+      
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" (click)="setPage(currentPage + 1)">Siguiente</a>
+          </li>
+        </ul>
+      </nav>
+  
+  
+      <h3>propiedades vendidas </h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>titulo</th>
+            <th>descripcion</th>
+            <th>ciudad</th>
+            
+            
+          </tr>
+        </thead>
+        <tbody>
+  
+          @for(propiedad of propiedades; track $index){
+            @if(propiedad.estado === 1 ){
+  
+          <tr>
+            <td>{{propiedad.titulo}}</td>
+            <td>{{propiedad.descripcion}}</td>
+            <td>{{propiedad.ciudad}}</td>
+  
+          
+            <td>
+  
+              <button (click)="open(propiedad)" class="btn btn-warning btn-sm">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+  
+  
+              <button class="btn btn-danger btn-sm">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+        }
+      }
+  
+  
+        </tbody>
+      </table>
+      <nav>
+        <ul class="pagination justify-content-center">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="setPage(currentPage - 1)">Anterior</a>
+          </li>
+      
+          @for (page of [].constructor(totalPages); track $index) {
+          <li class="page-item" [class.active]="currentPage === ($index + 1)">
+            <a class="page-link" (click)="setPage($index + 1)">{{ $index + 1 }}</a>
+          </li>
+          }
+      
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" (click)="setPage(currentPage + 1)">Siguiente</a>
+          </li>
+        </ul>
+      </nav>
+    </div> 
+  
+    
+   @if(this.openEdit === true){
+    <app-editarpropiedades [selectevent]="seletevent" (close)="handleModalClose($event)"  ></app-editarpropiedades>
+   }
+   @if(this.opencreate === true){
+    <app-crearpropiedad (close)="handleModal($event)" ></app-crearpropiedad>
+   }
+   
+  </div>

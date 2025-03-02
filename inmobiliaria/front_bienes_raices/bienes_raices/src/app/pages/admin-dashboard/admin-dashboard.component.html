@@ -1,0 +1,137 @@
+<div class="d-flex">
+    <!-- Sidebar -->
+    <div class="sidebar bg-dark text-white p-3">
+      <h4 class="text-center">Admin</h4>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link text-white" [routerLink]="['/ADMIN/admin']">📊 Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" [routerLink]="['/ADMIN/clientes']">👤 clientes </a>
+        </li>
+        <li class="nav-item">
+          
+        </li>
+        <li class="nav-item">
+          <button class="btn btn-danger w-100 mt-2" (click)="logout()">🚪 Cerrar Sesión</button>
+        </li>
+      </ul>
+    </div>
+  
+    <!-- Contenido principal -->
+    <div class="content p-4 flex-grow-1">
+      <h2>empleados</h2>
+  
+      <!-- Tarjetas de estadísticas -->
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header cardC " [routerLink]="['/ADMIN/clientes']">registro de usuarios </div>
+            <div class="card-body">
+              <h5 class="card-title">{{clientesTotales}}</h5>
+      
+              <p class="card-text">Usuarios nuevos</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-white bg-success mb-3">
+            <div class="card-header cardC " [routerLink]="['/ADMIN/empleados']"><h5>empleados</h5> </div>
+            <div class="card-body">
+  
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-white bg-warning mb-3">
+            <div class="card-header cardC" [routerLink]="['/ADMIN/propiedades']"><h5>propiedades</h5></div>
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    
+
+
+      <!-- Tabla de usuarios -->
+      <h3>cleintes nuevos </h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+           
+            <th>Nombre</th>
+            <th>apellido</th>
+            <th>Email</th>
+            <th>telefono</th>
+            <th>asesorado por  </th>
+          </tr>
+        </thead>
+        <tbody>
+         
+            @for(cliente of clientes; track $index){
+              @if(cliente.vendedor_id === null){
+
+                <tr>
+                  <td>{{cliente.nombre}}</td>
+                  <td>{{cliente.apellido}}</td>
+                  <td>{{cliente.email}}</td>
+                  <td>{{cliente.telefono}}</td>
+  
+                  @if(cliente.vendedor_id){
+  
+                    @for(vendedor of vendedores; track $index){
+                      @if(cliente.vendedor_id === vendedor.idvendedor){
+                        <td>{{vendedor.nombre}} {{vendedor.apellido}}</td>
+                      }
+                      
+                    }
+                    
+                  }@else{
+                    <td>sin asignar</td>
+                  }
+                
+              <td>
+         
+                <button (click)="open(cliente)" class="btn btn-warning btn-sm">
+                  <i class="bi bi-eye-fill"></i>
+                </button>
+              
+                
+                <!-- <button class="btn btn-danger btn-sm">
+                  <i class="bi bi-trash"></i>
+                </button> -->
+              </td>
+            </tr>
+          }
+              }
+          
+      
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <nav>
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="setPage(currentPage - 1)">Anterior</a>
+      </li>
+  
+      @for (page of [].constructor(totalPages); track  $index) {
+        <li class="page-item" [class.active]="currentPage === ($index + 1)">
+          <a class="page-link" (click)="setPage($index + 1)">{{ $index + 1 }}</a>
+        </li>
+      }
+  
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a class="page-link" (click)="setPage(currentPage + 1)">Siguiente</a>
+      </li>
+    </ul>
+  </nav>
+ 
+  @if( this.opendetalles === true){
+  <app-clientes-edit [cliente]="seletevent" (close)="close()"></app-clientes-edit>
+      }

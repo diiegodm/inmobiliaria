@@ -1,0 +1,23 @@
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  
+  .content {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+  }
+  button {
+    margin-right: 10px;
+    transition: transform 0.2s;
+}
+
+button:hover {
+    transform: scale(1.1); 
+}
+.cardC:hover{
+ cursor: pointer;
+}

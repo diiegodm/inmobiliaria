@@ -1,0 +1,214 @@
+<div class="d-flex">
+  <!-- Sidebar -->
+  <div class="sidebar bg-dark text-white p-3">
+    <h4 class="text-center">Admin</h4>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link text-white" [routerLink]="['/ADMIN/admin']">📊 Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" [routerLink]="['/ADMIN/clientes']">👤 clientes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#">⚙️ propiedades</a>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-danger w-100 mt-2" (click)="logout()">🚪 Cerrar Sesión</button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="content p-4 flex-grow-1">
+    <h2>Dashboard</h2>
+
+    <!-- Tarjetas de estadísticas -->
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card text-white bg-primary mb-3">
+          <div class="card-header cardC " [routerLink]="['/ADMIN/clientes']">registro de clientes</div>
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-white bg-success mb-3">
+          <div class="card-header cardC ">empleados </div>
+          <div class="card-body">
+            <button (click)="openmodal()" class="btn btn-warning btn-sm">agregar nuevo</button>
+            <p class="card-text"></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-white bg-warning mb-3">
+          <div class="card-header cardC " [routerLink]="['/ADMIN/propiedades']">propiedades</div>
+          <div class="card-body">
+
+            <p class="card-text"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <!-- Tabla de usuarios -->
+    <h3>lista de empleados </h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+
+          <th>Nombre</th>
+          <th>apellido</th>
+          <th>email</th>
+          <th>telefono</th>
+
+        </tr>
+      </thead>
+      <tbody>
+
+        @for(empleado of vendedores; track $index){
+        @if(empleado.rol !== 0){
+          @if(empleado.estado === 0){
+        <tr>
+          <td>{{empleado.nombre}}</td>
+          <td>{{empleado.apellido}}</td>
+          <td>{{empleado.correo}}</td>
+          <td>{{empleado.telefono}}</td>
+          <td>
+            <button (click)="open(empleado)" class="btn btn-warning btn-sm">
+              <i class="bi bi-eye-fill"></i>
+            </button>
+            <button (click)="openE(empleado)" class="btn btn-secondary btn-sm">
+              <i class="bi bi-pencil-square"></i>
+            </button>
+            <button (click)="eliminarusuario(empleado.idvendedor)" class="btn btn-danger btn-sm">
+              <i class="bi bi-trash"></i>
+            </button>
+
+          </td>
+        </tr>
+        }
+        }
+      }
+
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- aqui el modal con el cual vamos a dar de alta aun usuario -->
+@if(this.modalAdd === true){
+
+<div class="modal dosplay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Editar Vendedor</h2>
+      <span class="closer" (click)="closeModal()">X</span>
+    </div>
+
+    <form (submit)="saveChanges()">
+      <div class="card-employet">
+
+
+
+        <div class="body-conten">
+
+          <div class="info">
+            <label class="item-label">ID Vendedor:</label>
+            <input type="text" class="form-control" [(ngModel)]="empleadoupdate.idvendedor" name="idvendedor" disabled>
+           
+
+            <!-- Nombre -->
+            <label class="item-label">Nombre:</label>
+            <input type="text" class="form-control" [(ngModel)]="empleadoupdate.nombre" name="nombre">
+            @if (empleadoupdate.nombre === "" && isSubmitted === true) {
+              <p class="form-field--text-danger">Debes rellenar este campo con tu nombre/p>
+          }
+
+            <!-- Apellido -->
+            <label class="item-label">Apellido:</label>
+            <input type="text" class="form-control" [(ngModel)]="empleadoupdate.apellido" name="iapellido">
+            @if (empleadoupdate.apellido === "" && isSubmitted === true) {
+              <p class="form-field--text-danger">Debes rellenar este campo con tu apellido/p>
+          }
+
+            <!-- Teléfono -->
+            <label class="item-label">Teléfono:</label>
+            <input type="text" class="form-control" [(ngModel)]="empleadoupdate.telefono" name="telefono">
+            @if (empleadoupdate.telefono === "" && isSubmitted === true) {
+              <p class="form-field--text-danger">Debes rellenar este campo con tu telefono/p>
+          }
+            <!-- Rol -->
+            <label class="item-label">Rol:</label>
+            <select class="form-control" [(ngModel)]="empleadoupdate.rol" name="rol">
+              <option [value]="1">Vendedor</option>
+              <option [value]="2">oficinista</option>
+              <option [value]="3">limpieza</option>
+            </select>
+            @if (empleadoupdate.rol === "" && isSubmitted === true) {
+              <p class="form-field--text-danger">Debes rellenar el Rol</p>
+          }
+          </div>
+          <div class="info-2">
+            <!-- Correo -->
+            <label class="item-label">Correo:</label>
+            <input type="email" class="form-control" [(ngModel)]="empleadoupdate.correo" name="icorreo">
+            @if (empleadoupdate.correo === "" && isSubmitted === true) {
+              <p class="form-field--text-danger">Debes rellenar este campo con tu correo</p>
+          }
+
+            <!-- Contraseña -->
+            <label class="item-label">Contraseña:</label>
+            <input type="password" class="form-control" [(ngModel)]="empleadoupdate.password" name="password">
+            @if (empleadoupdate.password === "" && isSubmitted === true) {
+              <p class="form-field--text-danger">Debes rellenar este campo </p>
+          }
+
+            <!-- Dirección -->
+            <label class="item-label">Dirección:</label>
+            <input type="text" class="form-control" [(ngModel)]="empleadoupdate.direccion" name="direccion">
+            @if (empleadoupdate.direccion === "" && isSubmitted === true) {
+              <p class="form-field--text-danger">Debes rellenar la direccion</p>
+          }
+            <!-- DNI -->
+            <label class="item-label">DNI:</label>
+            <input type="text" class="form-control" [(ngModel)]="empleadoupdate.dni" name="dni">
+            @if (empleadoupdate.dni === "" && isSubmitted === true) {
+              <p class="form-field--text-danger">el DNI es obligarotio</p>
+          }
+          </div>
+
+          <label for="image">Imagen (URL)</label>
+          <input type="file" id="image" name="image" accept="image/*" (change)="handleImage($event)">
+
+
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+}
+
+
+
+
+@if(this.openDetails === true){
+<app-venddores-edit [empleadoDetails]="empleadoDetails" (closer)="close()"></app-venddores-edit>
+}
+@if(this.openEdit === true){
+<app-editar [empleadoDetails]="empleadoDetails"  
+(close)="handleModalClose($event)">></app-editar>
+}
