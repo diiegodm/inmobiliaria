@@ -1,3 +1,39 @@
+
+body {
+    background-image: url("/assets/image/imagenfondo.jpg");
+    background-position: center;
+    background-size: 100rem;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
 .alerta{
     color: red;
+}
+.inmobiliaria {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 45%;
+    margin: 25px auto;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+.inmobiliaria h2 {
+    color: #2c3e50;
+}
+.inmobiliaria p {
+    color: #34495e;
+}
+.inmobiliaria .direccion {
+    font-weight: bold;
+    margin-top: 10px;
+}
+.mapa {
+  width: 100%;
 }
