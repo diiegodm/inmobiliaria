@@ -7,28 +7,38 @@ const pool = require('../../utils/db');
 
 const createNewClient = async (req, res) => {
     try {
-        const data = req.body;
+        const data = req.body;  
+        console.log(req.headers)
 
         // Verificar si el correo ya está registrado
         const emailexiste = await selectByEmail(data.email);
         if (emailexiste) {
-            return res.status(400).json({ msg: "El correo ya está registrado" });
+            console.log(" Correo ya registrado:", data.email);
+            return res.status(400).json({ success: false, msg: "El correo ya está registrado" });
         }     
 
         // Insertar el cliente en la base de datos
         const insertedClient = await createCliente(data);
         if (insertedClient === -1) {
-            return res.status(400).json({ msg: "No se realizó el insert" });
+            return res.status(400).json({ success: false, msg: "No se realizó el insert" });
         }
 
         // Obtener el cliente recién creado desde la base de datos
         const clientCreated = await selectById(insertedClient);
-        return res.status(200).json({ success: true, data: clientCreated });
+        return res.status(200).json({  success: true,
+            msg: "Cliente registrado con éxito", data: clientCreated });
+       
 
-    } catch (error) {
-        console.error("Error en la creación del cliente:", error);
-        return res.status(500).json({ msg: "Error en el servidor", error });
+    }  catch (error) {
+        console.error("❌ Error en la creación del cliente:", error);
+
+        return res.status(500).json({ 
+            success: false, 
+            msg: "Error interno del servidor", 
+            error: error.message // Muestra el mensaje de error en la respuesta
+        });
     }
+    
 };
 
 // Obtener todos los clientes
