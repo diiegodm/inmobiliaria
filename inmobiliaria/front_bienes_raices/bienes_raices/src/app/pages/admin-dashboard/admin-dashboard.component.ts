@@ -3,24 +3,29 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { AdminService } from './services/admin.service';
 import { ClientesEditComponent } from './clientes/clientes-edit/clientes-edit.component';
+import { FormControl, FormsModule } from '@angular/forms';
+import { debounceTime } from 'rxjs';
 
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [CommonModule, ClientesEditComponent, RouterModule],
+  imports: [CommonModule, ClientesEditComponent, RouterModule,FormsModule],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.css',
 })
 
 
 export class AdminDashboardComponent {
+  searchControl = new FormControl('');
   public opendetalles: boolean = false;
   private router: Router = inject(Router);
   public clientes: any[] = [];
   public vendedores: any[] = [];
   public seletevent: any;
   clientesTotales: number = 0;
+  public searchText: string = '';
+  public resultados: any = [];
   private adminService: AdminService = inject(AdminService);
 
   // Variables para paginación
@@ -31,6 +36,12 @@ export class AdminDashboardComponent {
 
     this.getClients();
     this.getEmpleados();
+
+    this.searchControl.valueChanges
+    .pipe(debounceTime(300)) // Espera 300ms después de que el usuario deja de escribir
+    .subscribe(value => {
+      this.buscar()
+    });
   }
 
   getClients() {
@@ -56,6 +67,19 @@ export class AdminDashboardComponent {
         console.error(error);
       },
     });
+  }
+
+  buscar(){
+this.adminService.getClientesbybsuqeda(this.searchText).subscribe(data=>{
+  this.resultados = data
+});
+  }
+
+
+  filtrarElementos() {
+    return this.clientes.filter(item =>
+      item.toLowerCase().includes(this.searchText.toLowerCase())
+    );
   }
 
   // Métodos de paginación
@@ -90,4 +114,5 @@ export class AdminDashboardComponent {
   close() {
     this.opendetalles = false;
   }
+
 }

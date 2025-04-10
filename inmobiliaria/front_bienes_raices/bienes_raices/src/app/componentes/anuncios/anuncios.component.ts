@@ -2,11 +2,14 @@ import { Component, inject } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { AnunciosService } from './services/anuncios.service';
 import { CommonModule } from '@angular/common';
+
+
  interface Propiedad { // TODO: cree la interface aqui para no abrirlo en otra carpeta
+
   idpropiedades: number;
   titulo: string;
   precio: string;
-  imagenes: string[];  // --> se convierte las imagenes en array 
+  imagenes: string[]; 
   descripcion: string;
   ciudad: string;
   direccion: string;
@@ -39,7 +42,6 @@ export class AnunciosComponent {
     this.anunciosService.getAnuncios().subscribe({
       next: (data: any) => {
         this.anuncios = data;
-        console.log(this.anuncios);
       }, error: (error) => {
         console.error(error);
       }

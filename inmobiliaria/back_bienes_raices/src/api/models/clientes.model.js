@@ -14,13 +14,17 @@ const createCliente = async ({ nombre, apellido, telefono, email, fecha, hora, m
             [nombre, apellido, telefono, email, fecha, hora, mensaje, forma_de_contacto, presupuesto, operacion, vendedor_id]
         );
         if (result.affectedRows === 0) {
+            console.log("⚠️ No se insertó el cliente");
             return -1; // No se insertó el cliente
         }
+        console.log("✅ Cliente insertado con ID:", result.insertId);
         return result.insertId; // Devuelve el ID del cliente insertado
     } catch (error) {
         if (error.code === 'ER_DUP_ENTRY') {
+            console.error("❌ Error: Correo duplicado", email);
             throw new Error('El correo ya está registrado');
         }
+        console.error("❌ Error en la base de datos:", error);
         throw error;
     }
 };

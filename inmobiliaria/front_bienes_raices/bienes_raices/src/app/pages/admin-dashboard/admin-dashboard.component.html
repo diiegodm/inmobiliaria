@@ -13,6 +13,7 @@
           
         </li>
         <li class="nav-item">
+          
           <button class="btn btn-danger w-100 mt-2" (click)="logout()">🚪 Cerrar Sesión</button>
         </li>
       </ul>
@@ -54,8 +55,24 @@
       </div>
 
 
-    
+      <input type="text" [(ngModel)]="searchText" class="form-control" placeholder="Buscar...">
+      <button class="btn btn-primary mt-2" (click)="buscar()">Buscar</button>
+      
+      <ul>
+        <li *ngFor="let producto of resultados">
+          {{ producto.nombre }}
+        </li>
+      </ul>
+      
 
+
+      <!-- <div class="input-group">
+        <input class="form-control" type="search" placeholder="Buscar..." aria-label="Buscar">
+        <button class="btn btn-outline-secondary" type="submit">
+          <i class="bi bi-search"></i>
+        </button>
+      </div>
+       -->
 
       <!-- Tabla de usuarios -->
       <h3>cleintes nuevos </h3>

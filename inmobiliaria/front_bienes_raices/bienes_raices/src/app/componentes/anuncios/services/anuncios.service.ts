@@ -10,7 +10,7 @@ export class AnunciosService {
 private http: HttpClient = inject(HttpClient)
 
  getAnuncios() {
-  return this.http.get('http://localhost:3500/propiedades/sitios')
+  return this.http.get('http://localhost:3502/propiedades/sitios')
 }
 
 
