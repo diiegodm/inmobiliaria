@@ -15,6 +15,8 @@ import Swal from 'sweetalert2'
 })
 export class LoginComponent {
   private authService: AuthService = inject(AuthService)
+  
+  menuAbierto = false;
 
   private router: Router = inject(Router);
   public userLoginForm = {
@@ -45,11 +47,15 @@ export class LoginComponent {
        
       },
       error: (error) => {
-        Swal.fire("SweetAlert2 is working!");
+        Swal.fire("Error", "Usuario o contraseña incorrectos");
         console.error(error);
       }
     });
     
-RouterLink
+
+  }
+
+  toggleMenu() {
+    this.menuAbierto = !this.menuAbierto;
   }
 }

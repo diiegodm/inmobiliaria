@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { AnunciosService } from './services/anuncios.service';
 import { CommonModule } from '@angular/common';
+import { FooterComponent } from '../footer/footer.component';
 
 
  interface Propiedad { // TODO: cree la interface aqui para no abrirlo en otra carpeta
@@ -21,7 +22,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-anuncios',
   standalone: true,
-  imports: [HeaderComponent,CommonModule],
+  imports: [HeaderComponent,CommonModule,FooterComponent],
   templateUrl: './anuncios.component.html',
   styleUrl: './anuncios.component.css'
 })

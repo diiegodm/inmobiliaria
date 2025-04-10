@@ -3,11 +3,12 @@ import { HeaderComponent } from '../header/header.component';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, RequiredValidator, ValidatorFn, Validators } from '@angular/forms';
 import { ContacService } from './services/contac.service';
 import Swal from 'sweetalert2';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-contac-us',
   standalone: true,
-  imports: [HeaderComponent, FormsModule,ReactiveFormsModule],
+  imports: [HeaderComponent, FormsModule,ReactiveFormsModule,FooterComponent],
   templateUrl: './contac-us.component.html',
   styleUrls: ['./contac-us.component.css']
 })
@@ -76,7 +77,7 @@ if(this.form.get('nombre')?.value == ''  ){
             title: 'Formulario enviado',
             text: 'Tu formulario ha sido enviado con éxito.',
           });
-          this.form.reset(); 
+         
         } else {
           Swal.fire({
             icon: "error",
