@@ -23,7 +23,7 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
       if (error.status === 401) { 
         localStorage.removeItem('token');
         localStorage.removeItem('role');
-        router.navigate(['/login']); // Redirigir al login si el token es inválido
+        router.navigate(['/login']); // Redirigir al logi3n si el token es inválido
       }
       return throwError(() => error);
     })

@@ -6,37 +6,42 @@ import { inject, Injectable } from '@angular/core';
 })
 export class VendedorService {
 
-  constructor() { }
+
+
+private apiPropiedad = "http://localhost:3502/propiedades"
+private apiCliente= "http://localhost:3502/clientes";
+private apiUser = "http://localhost:3502/users";
+
 private http: HttpClient = inject(HttpClient);
 
 
 
 getAnuncios() {
-  return this.http.get('http://localhost:3500/propiedades/sitios')
+  return this.http.get(`${this.apiPropiedad}/sitios`)
 }
 
 getanunciosById(id:number){
-  return this.http.get(`http://localhost:3500/propiedades/propiedadesBy/${id}`)
+  return this.http.get(`${this.apiPropiedad}/propiedadesBy/${id}`)
 }
 
 
 updateAnuncio( id: string, crearpropiedadfroms:any) {
-  return this.http.put(`http://localhost:3500/propiedades/update/${id}`, crearpropiedadfroms)
+  return this.http.put(`${this.apiPropiedad}/update/${id}`, crearpropiedadfroms)
 }
 
 crearAnuncio(crearpropiedadfroms: FormData) {
-  return this.http.post('http://localhost:3500/propiedades/newPropiedades', crearpropiedadfroms);
+  return this.http.post(`${this.apiPropiedad}/newPropiedades`, crearpropiedadfroms);
 }
 
 
 
 //clientes
 getClientes (id:number){
-  return this.http.get(`http://localhost:3500/users/clientes/${id}`)
+  return this.http.get(`${this.apiUser}/clientes/${id}`)
 }
 
 newEStatus(id:number,estado:any){
-  return this.http.post(`http://localhost:3500/clientes/updateestado/${id}`,estado)
+  return this.http.post(`${this.apiCliente}/updateestado/${id}`,estado)
 }
 
 

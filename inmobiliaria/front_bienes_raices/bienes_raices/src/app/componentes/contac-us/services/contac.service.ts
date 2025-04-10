@@ -6,10 +6,12 @@ import { inject, Injectable } from '@angular/core';
 })
 export class ContacService {
 
+  private apiCliente= "http://localhost:3502/clientes";
+  
   private http: HttpClient = inject(HttpClient);
 
-  createAnuncio(formNew: any) {
-  return this.http.post('http://localhost:3500/clientes/newClient', formNew)
+  createAnuncio(form: any) {
+  return this.http.post(`${this.apiCliente}/newClient`, form)
 }
 
 }

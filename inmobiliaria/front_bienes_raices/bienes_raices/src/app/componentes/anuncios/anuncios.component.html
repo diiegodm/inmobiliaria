@@ -8,13 +8,13 @@
     @for(anuncio of anuncios; track $index) {
       <div class="card anuncio_casa">
         <div class="header_card anuncio">
-          <img src="http://localhost:3500/uploads/propiedad/{{ anuncio.imagen.split(',')[0] }}" alt="Imagen de la propiedad">
+          <img src="http://localhost:3502/uploads/propiedad/{{ anuncio.imagen.split(',')[0] }}" alt="Imagen de la propiedad">
           <h3>{{ anuncio.titulo }}</h3>
         </div>
         <div class="card_contenido">
           <p>{{ anuncio.descripcion | slice:0:30 }}...</p>
           <div class="card_precio">
-            <p class="precio">Precio: <span>{{ anuncio.precio }}</span></p>
+            <p class="precio">Precio: <span>{{ anuncio.precio | number }}</span></p>
           </div>
           <div class="card_iconos">
             <img src="../../assets/image/icono_wc.svg" alt="Baños">
@@ -52,7 +52,7 @@
           <div class="carousel-inner">
             @for (imagen of propiedadDetails?.imagenes; track $index) {
               <div class="carousel-item" [class.active]="$index === 0">
-                <img [src]="'http://localhost:3500/uploads/propiedad/' + imagen.trim()" class="d-block w-100" alt="Imagen de la propiedad">
+                <img [src]="'http://localhost:3502/uploads/propiedad/' + imagen.trim()" class="d-block w-100" alt="Imagen de la propiedad">
               </div>
             }
            

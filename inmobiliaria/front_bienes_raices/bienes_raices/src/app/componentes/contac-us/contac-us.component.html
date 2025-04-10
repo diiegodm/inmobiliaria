@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<section>
+<!-- <section>
     <div class="form-container">
         <h1>Formulario de Cliente</h1>
         <form (ngSubmit)="handleSubmit()">
@@ -87,4 +87,153 @@
             <button type="submit">Enviar</button>
         </form>
     </div>
+</section> -->
+
+
+<section class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4>Contacta con nosotros</h4>
+                </div>
+                <div class="card-body">
+
+                    <!-- Barra de progreso -->
+                    <div class="progress mb-4">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
+                            role="progressbar" [style.width.%]="progreso"></div>
+                    </div>
+                    <form [formGroup]="form" (ngSubmit)="enviarFormulario()">
+                        <!-- Paso 1: Información Personal -->
+                        @if (pasoActual === 1) {
+                        <div>
+                            <h5 class="mb-3">Paso 1: Información Personal</h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label>Nombre</label>
+                                    <input type="text" class="form-control" formControlName="nombre"
+                                        placeholder="Tu nombre">
+
+                                    @if (form.get('nombre')?.invalid && form.get('nombre')?.touched) {
+                                    <div class="alert alert-warning mt-2 p-2">Campo obligatorio</div>
+                                    }
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label>Apellido</label>
+                                    <input type="text" class="form-control" formControlName="apellido"
+                                        placeholder="Tu apellido">
+                                    @if (form.get('apellido')?.invalid && form.get('apellido')?.touched) {
+                                    <div class="alert alert-warning mt-2 p-2">Campo obligatorio</div>
+                                    }
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label>Teléfono</label>
+                                    <input type="text" class="form-control" formControlName="telefono"
+                                        placeholder="Tu teléfono">
+                                    @if (form.get('telefono')?.invalid && form.get('telefono')?.touched) {
+                                    <div class="alert alert-warning mt-2 p-2">Campo obligatorio</div>
+                                    }
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" formControlName="email"
+                                        placeholder="Tu email">
+                                    @if (form.get('email')?.invalid && form.get('email')?.touched) {
+                                    <div class="alert alert-warning mt-2 p-2">Campo obligatorio</div>
+                                    }
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label>Forma de Contacto</label>
+                                    <select class="form-control" formControlName="forma_de_contacto">
+                                        <option value="llamada">Llamada</option>
+                                        <option value="email">Email</option>
+                                        <option value="whatsapp">WhatsApp</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary float-end" (click)="siguientePaso()">Siguiente <i
+                                    class="bi bi-arrow-right"></i></button>
+                        </div>
+                        }
+
+                        <!-- Paso 2: Detalles de la Cita -->
+                        @if (pasoActual === 2) {
+                        <div>
+                            <h5 class="mb-3">Paso 2: Detalles de la Cita</h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label>Fecha</label>
+                                    <input type="date" class="form-control" formControlName="fecha">
+                                    @if (form.get('fecha')?.invalid && form.get('fecha')?.touched) {
+                                    <div class="alert alert-warning mt-2 p-2">indique una fecha valida, no puede ser
+                                        antes de hoy</div>
+                                    }
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label>Hora</label>
+                                    <input type="time" class="form-control" formControlName="hora">
+                                    @if (form.get('hora')?.invalid && form.get('hora')?.touched) {
+                                    <div class="alert alert-warning mt-2 p-2">indica una hora valida</div>
+                                    }
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label>Mensaje</label>
+                                    <textarea class="form-control" formControlName="mensaje" rows="3"
+                                        placeholder="Escribe un mensaje"></textarea>
+                                    @if (form.get('hora')?.invalid && form.get('hora')?.touched) {
+                                    <div class="alert alert-warning mt-2 p-2">describe brevemente lo que deseas</div>
+                                    }
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label>Presupuesto</label>
+                                    <input type="number" class="form-control" formControlName="presupuesto"
+                                        placeholder="Tu presupuesto">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label>Operación</label>
+                                    <select class="form-control" formControlName="operacion">
+                                        <option value="compra">Compra</option>
+                                        <option value="venta">Venta</option>
+                                        <option value="otro">Otro</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn btn-secondary" (click)="pasoAnterior()"><i class="bi bi-arrow-left"></i>
+                                Atrás</button>
+                            <button class="btn btn-primary float-end" (click)="siguientePaso()">Siguiente <i
+                                    class="bi bi-arrow-right"></i></button>
+                        </div>
+                        }
+
+                        <!-- Paso 3: Confirmación -->
+                        @if (pasoActual === 3) {
+                        <div>
+                            <h5 class="mb-3">Paso 3: Confirmación</h5>
+                            <ul class="list-group">
+                                <li class="list-group-item"><strong>Nombre:</strong> {{ form.value.nombre }}</li>
+                                <li class="list-group-item"><strong>Apellido:</strong> {{ form.value.apellido }}</li>
+                                <li class="list-group-item"><strong>Teléfono:</strong> {{ form.value.telefono }}</li>
+                                <li class="list-group-item"><strong>Email:</strong> {{ form.value.email }}</li>
+                                <li class="list-group-item"><strong>Forma de Contacto:</strong> {{
+                                    form.value.forma_de_contacto }}</li>
+                                <li class="list-group-item"><strong>Fecha:</strong> {{ form.value.fecha }}</li>
+                                <li class="list-group-item"><strong>Hora:</strong> {{ form.value.hora }}</li>
+                                <li class="list-group-item"><strong>Mensaje:</strong> {{ form.value.mensaje }}</li>
+                                <li class="list-group-item"><strong>Presupuesto:</strong> {{ form.value.presupuesto }}
+                                </li>
+                                <li class="list-group-item"><strong>Operación:</strong> {{ form.value.operacion }}</li>
+                            </ul>
+                            <button class="btn btn-secondary mt-3" (click)="pasoAnterior()"><i
+                                    class="bi bi-arrow-left"></i> Atrás</button>
+                            <button class="btn btn-success mt-3 float-end" (click)="enviarFormulario()">Enviar <i
+                                    class="bi bi-check-circle"></i></button>
+                        </div>
+                        }
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </section>

@@ -11,28 +11,32 @@ private http: HttpClient = inject(HttpClient);
 
 
 getClientes (){
-  return this.http.get('http://localhost:3500/clientes/clients')
+  return this.http.get('http://localhost:3502/clientes/clients')
 }
 
 getVendedores(){
-  return this.http.get('http://localhost:3500/users/vendedores')
+  return this.http.get('http://localhost:3502/users/vendedores')
+}
+
+getClientesbybsuqeda (query:string){
+  return this.http.get(`http://localhost:3502/clientes/clients?q=${query}`)
 }
 
 
 asignarVendedor(id: string, asignar: any) {
-  return this.http.put(`http://localhost:3500/clientes/cliente-vendedor/${id}`,asignar);
+  return this.http.put(`http://localhost:3502/clientes/cliente-vendedor/${id}`,asignar);
 }
 
 editEmpleado(id:string, empleadoEdit:any) {
-  return this.http.put(`http://localhost:3500/users/update/${id}`,empleadoEdit);
+  return this.http.put(`http://localhost:3502/users/update/${id}`,empleadoEdit);
 }
 
 newEmpleado(empleadoupdate:any){
-  return this.http.post(`http://localhost:3500/users/newOne`,empleadoupdate);
+  return this.http.post(`http://localhost:3502/users/newOne`,empleadoupdate);
 }
 
 eliminar(id:string,){
-    return this.http.post(`http://localhost:3500/users/eliminacion/${id}`,{estado:1})    
+    return this.http.post(`http://localhost:3502/users/eliminacion/${id}`,{estado:1})    
 }
 
 

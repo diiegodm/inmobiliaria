@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../service/auth.service';
 import { HeaderComponent } from '../../../componentes/header/header.component';
 import { Router, RouterLink } from '@angular/router';
+import Swal from 'sweetalert2'
 
 
 @Component({
@@ -44,7 +45,7 @@ export class LoginComponent {
        
       },
       error: (error) => {
-        alert('Hubo un error');
+        Swal.fire("SweetAlert2 is working!");
         console.error(error);
       }
     });
