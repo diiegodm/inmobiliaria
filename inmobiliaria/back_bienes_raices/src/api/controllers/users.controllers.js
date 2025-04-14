@@ -4,7 +4,9 @@ const { getVendedores,
     selectById,
     selectByDni,
     updateVendedores,
-    eliminarlogico ,filtarporvendedor} = require('../models/users.model');
+    eliminarlogico,
+    filtarporvendedor,
+    vendedores} = require('../models/users.model');
 
 const bcrypt = require("bcrypt");
 const { createToken } = require('../../utils/jwt')
@@ -25,7 +27,7 @@ try {
     if (req.file) {
         data.img = path.basename(req.file.path); // Guarda solo el nombre del archivo
     } else {
-        data.img = null; // En caso de que no se suba una imagen
+        data.img = null; 
     }
     
    
@@ -194,8 +196,17 @@ const getClientesPorVendedor = async (req, res) => {
     }
 };
 
+const getVendedoresAll = async (req, res) => {
+    try {
+      const result = await vendedores();
+      res.json({ success: true, data: result });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: 'Error al obtener los usuarios',
+        error
+      });
+    }
+  };
 
-
-
-
-module.exports = { getUsers, login, createNewWorker, update,eliminado,getClientesPorVendedor };
+module.exports = { getUsers, login, createNewWorker, update,eliminado,getClientesPorVendedor, getVendedoresAll};
