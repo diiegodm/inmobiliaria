@@ -4,11 +4,11 @@ const pool = require('../../utils/db');
 
 
 
-const insertPropiedades = async ({titulo, precio, imagen, descripcion, habitaciones, wc, parqueadero, creado, vendedor_idvendedor, ciudad, direccion}) => {
+const insertPropiedades = async ({titulo, precio, imagen, descripcion, habitaciones, wc, parqueadero, creado, vendedor_idvendedor, ciudad, direccion, ubicacion }) => {
     try {
         const [result] = await pool.query(
-            "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, parqueadero, creado, vendedor_idvendedor, ciudad, direccion) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
-            [titulo, precio, imagen, descripcion, habitaciones, wc, parqueadero, creado, vendedor_idvendedor, ciudad, direccion]
+            "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, parqueadero, creado, vendedor_idvendedor, ciudad, direccion, ubicacion) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+            [titulo, precio, imagen, descripcion, habitaciones, wc, parqueadero, creado, vendedor_idvendedor, ciudad, direccion, ubicacion]
         );
 
         if (result.affectedRows === 0) {

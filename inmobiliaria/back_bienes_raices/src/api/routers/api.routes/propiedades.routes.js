@@ -6,7 +6,8 @@ const uploaded= require('../../midellware/uploadstorage');
 const { newPropiedades,
   getpropiedades,
   editarPropiedad,
-  propiedadByVendedor
+  propiedadByVendedor,
+  getPropiedadesById,
 } = require('../../controllers/propiedades.controllers');
 
 
@@ -14,5 +15,6 @@ router.post('/newPropiedades', uploadImage.array('imagenes',5), newPropiedades);
 router.get('/sitios', getpropiedades);
 router.put('/update/:idpropiedades', uploadImage.array('imagenes',5), editarPropiedad);
 router.get('/propiedadesBy/:idvendedor',checkToken, propiedadByVendedor)
+router.get('/propiedadesById/:id', getPropiedadesById);
 
 module.exports = router

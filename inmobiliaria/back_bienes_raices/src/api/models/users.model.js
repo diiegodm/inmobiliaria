@@ -92,9 +92,19 @@ const filtarporvendedor = async (idvendedor) => {
     }
 };
 
+const vendedores = async () => {
+    try {
+      const result = await pool.query("SELECT * FROM users WHERE rol = 1 AND estado = 0");
+      return result[0]; 
+    } catch (error) {
+      console.error("Error al filtrar por vendedor:", error);
+      throw error;
+    }
+  };
 
 
 
 
 
-module.exports = {getVendedores, selectByEmail,inserVendedor,selectById,selectByDni,updateVendedores,eliminarlogico , filtarporvendedor};
+
+module.exports = {getVendedores, selectByEmail,inserVendedor,selectById,selectByDni,updateVendedores,eliminarlogico , filtarporvendedor, vendedores };

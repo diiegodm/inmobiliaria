@@ -75,5 +75,18 @@ const propiedadByVendedor = async (req,res) => {
     }
 }
 
+getPropiedadesById = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const propiedad = await selectbyId(id);
+        if (!propiedad) {
+            return res.status(404).json({ msg: "Propiedad no encontrada" });
+        }
+        return res.status(200).json({ success: true, data: propiedad });
+    } catch (error) {
+        console.error("Error al obtener la propiedad:", error);
+        return res.status(500).json({ msg: "Error en el servidor" });
+    }
+};
 
-module.exports = {newPropiedades,getpropiedades, editarPropiedad,propiedadByVendedor};
+module.exports = {newPropiedades, getpropiedades, editarPropiedad, propiedadByVendedor, getPropiedadesById};
