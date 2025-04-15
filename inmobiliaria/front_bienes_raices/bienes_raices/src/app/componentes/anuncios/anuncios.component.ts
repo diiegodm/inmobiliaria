@@ -3,14 +3,15 @@ import { HeaderComponent } from '../header/header.component';
 import { AnunciosService } from './services/anuncios.service';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from '../footer/footer.component';
+import { RouterLink } from '@angular/router';
 
 
- interface Propiedad { // TODO: cree la interface aqui para no abrirlo en otra carpeta
+interface Propiedad { // TODO: cree la interface aqui para no abrirlo en otra carpeta
 
   idpropiedades: number;
   titulo: string;
   precio: string;
-  imagenes: string[]; 
+  imagenes: string[];
   descripcion: string;
   ciudad: string;
   direccion: string;
@@ -22,17 +23,18 @@ import { FooterComponent } from '../footer/footer.component';
 @Component({
   selector: 'app-anuncios',
   standalone: true,
-  imports: [HeaderComponent,CommonModule,FooterComponent],
+  imports: [HeaderComponent, CommonModule, FooterComponent,RouterLink],
   templateUrl: './anuncios.component.html',
   styleUrl: './anuncios.component.css'
 })
 export class AnunciosComponent {
 
-   public propiedadDetails: Propiedad | null = null;
-
+  public propiedadDetails: Propiedad | null = null;
   public anuncios: any[] = [];
   private anunciosService: AnunciosService = inject(AnunciosService);
- 
+
+
+
 
   ngOnInit() {
     this.getAnuncios();
@@ -51,11 +53,14 @@ export class AnunciosComponent {
 
 
   openDetalles(anuncio: any): void {
+
     this.propiedadDetails = {
+
       ...anuncio,
       imagenes: anuncio.imagen ? anuncio.imagen.split(',').map((img: string) => img.trim()) : []
     };
+    console.log(anuncio)
   }
-  
+
 
 }

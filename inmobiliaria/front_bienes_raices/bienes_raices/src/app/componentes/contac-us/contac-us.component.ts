@@ -4,6 +4,7 @@ import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModu
 import { ContacService } from './services/contac.service';
 import Swal from 'sweetalert2';
 import { FooterComponent } from '../footer/footer.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-contac-us',
@@ -17,6 +18,8 @@ export class ContacUSComponent {
 
   private contactservice: ContacService = inject(ContacService);
 
+  
+  private activatedRoute = inject(ActivatedRoute);
   formulario = inject(FormBuilder);
   pasoActual = 1;
   totalPasos = 3; 
@@ -38,6 +41,15 @@ export class ContacUSComponent {
   
   });
 
+ngOnInit(): void{
+  this.activatedRoute.queryParams.subscribe((params) => {
+    const mensaje = params['mensaje'];
+    if (mensaje) {
+      this.form.get('mensaje')?.setValue(mensaje); // ✅ Usa this.form, no this.formulario
+    }
+  });
+  
+}
 
   siguientePaso() {
 if(this.form.get('nombre')?.value == ''  ){

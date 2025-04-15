@@ -1,0 +1,74 @@
+
+<app-header></app-header>
+
+
+<!-- Título -->
+<h1 class="titulo-propiedad">{{ propiedadDetails?.titulo }}</h1>
+
+<!-- Carrusel -->
+<div id="carouselExample" class="carousel slide carrusel-propiedad" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    @for (img of propiedadDetails?.imagenes; track $index) {
+      <div class="carousel-item" [class.active]="$index === 0">
+        <img [src]="'http://localhost:3502/uploads/propiedad/' + img.trim()" class="d-block imagen-fija" alt="Imagen de la propiedad">
+      </div>
+    }
+  </div>
+
+  <!-- Controles -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+<!-- Descripción -->
+<div class="descripcionCarrucel">
+  <p> <strong>descripcion: </strong>{{ propiedadDetails?.descripcion }}</p>
+</div>
+<div class="botton-ir">
+  <a 
+  [routerLink]="['/contacto']" 
+  [queryParams]="{ mensaje: 'Estoy interesado en la propiedad ' + propiedadDetails?.titulo }"
+  class="btn btn-primary"
+>
+  preguntar por la propiedad
+</a>
+</div>
+<hr>
+
+
+
+
+
+<section class="vendedores-section">
+  <div class="vendedores-container">
+    @for (vendedor of vendedores; track $index) {
+      <div class="card vendedor-card">
+        <div class="card-body">
+          <h5 class="card-title">Vendedor</h5>
+          <img 
+            class="vendedor-img" 
+            src="http://localhost:3502/uploads/empleados/{{vendedor.img?.split(',')[0]}}" 
+            alt="Foto del vendedor"
+          >
+          <p class="card-text">Nombre: {{ vendedor?.nombre }}</p>
+          <p class="card-text">Teléfono: {{ vendedor?.telefono }}</p>
+          <p class="card-text">Correo: {{ vendedor?.correo }}</p>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="propiedad-mapa">
+    @if (ubicacionMapa) {
+      <div [innerHTML]="ubicacionMapa"></div>
+    }
+  </div>
+  
+</section>
+
+<app-footer></app-footer>
+

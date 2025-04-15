@@ -30,7 +30,8 @@ export class EditarpropiedadesComponent {
     vendedor_idvendedor: "",
     ciudad: "",
     direccion: "",
-    estado: ""
+    estado: "",
+    ubicacion:""
   };
 
   ngOnInit() {
@@ -63,6 +64,7 @@ export class EditarpropiedadesComponent {
     userFormData.append('ciudad', this.crearpropiedadfroms.ciudad || this.selectevent.ciudad);
     userFormData.append('direccion', this.crearpropiedadfroms.direccion || this.selectevent.direccion);
     userFormData.append('estado', this.crearpropiedadfroms.estado || this.selectevent.estado);
+    userFormData.append('ubicacion', this.crearpropiedadfroms.ubicacion || this.selectevent.ubicacion);
 
     // Agregar múltiples imágenes si hay nuevas seleccionadas
     if (this.imagenes.length > 0) {
