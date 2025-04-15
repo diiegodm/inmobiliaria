@@ -29,6 +29,9 @@
           
             <label class="item-label">descripcion:</label>
             <textarea  class="form-control" [(ngModel)]="crearpropiedadfroms.descripcion" name="descripcion"></textarea>
+            
+            <label class="item-label">direccion</label>
+            <input type="text" class="form-control" [(ngModel)]="crearpropiedadfroms.direccion" name="direccion">
 
            
 
@@ -50,8 +53,10 @@
             <label class="item-label">ciudad:</label>
             <input type="text" class="form-control" [(ngModel)]="crearpropiedadfroms.ciudad" name="ciudad">
 
-            <label class="item-label">direccion</label>
-            <input type="text" class="form-control" [(ngModel)]="crearpropiedadfroms.direccion" name="direccion">
+            <label class="item-label">ubicacion</label>
+            <textarea  class="form-control" [(ngModel)]="crearpropiedadfroms.ubicacion" name="ubicacion"></textarea>
+
+            
 
             <label class="item-label">estado</label>
             <select class="form-control" [(ngModel)]="crearpropiedadfroms.estado" name="estado">
@@ -60,6 +65,8 @@
             </select>
 
           </div>
+
+          
 
           <label for="image">Imagen (URL)</label>
           <input type="file" id="image" name="image" accept="image/*" (change)="handleImage($event)" multiple>

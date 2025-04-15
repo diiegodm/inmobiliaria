@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 
 import { AnunciosComponent } from './anuncios/anuncios.component';
 import { ContacUSComponent } from './contac-us/contac-us.component';
+import { IdAnuncioComponent } from './anuncios/id-anuncio/id-anuncio.component';
 
 
 export const HOME_ROUTES: Routes = [
@@ -20,6 +21,10 @@ export const HOME_ROUTES: Routes = [
     {
         path: 'anuncios',
         component: AnunciosComponent
+    },
+    {
+        path: 'propiedadesById/:id',
+        component: IdAnuncioComponent
     },
     {
         path: 'contacto',

@@ -29,7 +29,8 @@ export class CrearpropiedadComponent {
     vendedor_idvendedor: this.getId,
     ciudad: "",
     direccion: "",
-    estado: ""
+    estado: "",
+    ubicacion: ""
   };
   public get hoy(): string {
     return new Date().toISOString().split('T')[0];
@@ -46,7 +47,7 @@ export class CrearpropiedadComponent {
     const eventTarget = event.target as HTMLInputElement;
     if (eventTarget.files && eventTarget.files.length > 0) {
       this.imagenes = Array.from(eventTarget.files);
-      console.log("📸 Imágenes seleccionadas:", this.imagenes);
+      console.log(" Imágenes seleccionadas:", this.imagenes);
     } else {
       console.warn("⚠ No se seleccionó ninguna imagen.");
     }
@@ -67,6 +68,7 @@ export class CrearpropiedadComponent {
     userFormData.append('ciudad', this.crearpropiedadfroms.ciudad);
     userFormData.append('direccion', this.crearpropiedadfroms.direccion);
     userFormData.append('estado', this.crearpropiedadfroms.estado);
+    userFormData.append('ubicacion', this.crearpropiedadfroms.ubicacion)
 ;
 
     //  Revisión de imágenes
@@ -96,7 +98,7 @@ export class CrearpropiedadComponent {
         });
       },
       error: (error) => {
-        console.error("❌ Error en la petición:", error);
+        console.error(" Error en la petición:", error);
         Swal.fire({
           position: "center",
           icon: "error",

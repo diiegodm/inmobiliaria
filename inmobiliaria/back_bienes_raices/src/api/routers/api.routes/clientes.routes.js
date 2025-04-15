@@ -9,4 +9,4 @@ router.put('/cliente-vendedor/:idcliente',checkTokenAdmin, updateClientVendedor)
 router.post('/updateestado/:idcliente', checkToken, updateEstado)
 
 
-module.exports = router
+module.exports = router 
