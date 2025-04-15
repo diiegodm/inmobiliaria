@@ -7,7 +7,7 @@ const pool = require('../../utils/db');
 const insertPropiedades = async ({titulo, precio, imagen, descripcion, habitaciones, wc, parqueadero, creado, vendedor_idvendedor, ciudad, direccion, ubicacion }) => {
     try {
         const [result] = await pool.query(
-            "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, parqueadero, creado, vendedor_idvendedor, ciudad, direccion, ubicacion) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+            "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, parqueadero, creado, vendedor_idvendedor, ciudad, direccion, ubicacion) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
             [titulo, precio, imagen, descripcion, habitaciones, wc, parqueadero, creado, vendedor_idvendedor, ciudad, direccion, ubicacion]
         );
 
@@ -37,7 +37,11 @@ const updatepropiedades = async (idpropiedades, data) => {
         wc, 
         parqueadero, 
         creado, 
-        vendedor_idvendedor 
+        vendedor_idvendedor,
+        ciudad,
+        direccion,
+        estado,
+        ubicacion
         
     } = data;
 
@@ -63,9 +67,13 @@ const updatepropiedades = async (idpropiedades, data) => {
                 wc = IFNULL(?, wc),
                 parqueadero = IFNULL(?, parqueadero),
                 creado = IFNULL(?, creado),
-                vendedor_idvendedor = IFNULL(?, vendedor_idvendedor)
+                vendedor_idvendedor = IFNULL(?, vendedor_idvendedor),
+                ciudad = IFNULL(?, ciudad),
+                direccion = IFNULL(?, direccion),
+                estado = IFNULL(?, estado),
+                ubicacion = IFNULL(?, ubicacion)
             WHERE idpropiedades = ?`,
-            [titulo, precio, imagen, descripcion, habitaciones, wc, parqueadero, validCreado, vendedor_idvendedor, idpropiedades]
+            [titulo, precio, imagen, descripcion, habitaciones, wc, parqueadero, validCreado, vendedor_idvendedor, ciudad, direccion, estado, ubicacion, idpropiedades]
         );
 
         return result;
